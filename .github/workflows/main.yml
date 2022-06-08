@@ -16,4 +16,4 @@ jobs:
         id: cache-test
         with:
           path: cacheFolder
-          key: cache-${{ github.run_id }}
+          key: cache
