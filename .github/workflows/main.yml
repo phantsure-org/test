@@ -1,0 +1,19 @@
+name: Example
+on:
+  workflow_dispatch:
+jobs:
+  some-job:
+    name: Some Job
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          mkdir cacheFolder
+          cd cacheFolder
+          dd if=/dev/urandom of=file.txt count=100 bs=1048576
+          cat file.txt | openssl dgst -sha256 > sha256.txt
+          
+      - uses: actions/cache@v3
+        id: cache-test
+        with:
+          path: cacheFolder
+          key: cache-${{ github.run_id }}
